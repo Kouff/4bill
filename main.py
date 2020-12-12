@@ -3,7 +3,10 @@ from starlette.endpoints import HTTPEndpoint
 from starlette.responses import JSONResponse
 from starlette.routing import Route
 
+from limiter import Limiter
 
+
+@Limiter
 class Request(HTTPEndpoint):
     async def get(self, request):
         return JSONResponse({'result': 'OK'})
