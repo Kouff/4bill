@@ -2,6 +2,7 @@ Clone a project and move to it:
 
     $ git clone https://github.com/Kouff/4bill.git
     $ cd 4bill
+    $ git checkout with_docker
 Create a [virtualenv](https://virtualenv.pypa.io/en/latest/installation.html#via-pip) and [activate](https://virtualenv.pypa.io/en/latest/user_guide.html#activators) it or skip this point.
 
 Install the requirements:
