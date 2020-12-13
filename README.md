@@ -1,3 +1,8 @@
+The repository has branches:
+* master (without docker)
+* with_docker (this code but in docker container)
+* with_docker_and_redis (this code but in docker container and using redis instead of dict from python)
+
 Clone a project and move to it:
 
     $ git clone https://github.com/Kouff/4bill.git
