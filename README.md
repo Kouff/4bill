@@ -3,14 +3,6 @@ Clone a project and move to it:
     $ git clone https://github.com/Kouff/4bill.git
     $ cd 4bill
     $ git checkout with_docker
-Create a [virtualenv](https://virtualenv.pypa.io/en/latest/installation.html#via-pip) and [activate](https://virtualenv.pypa.io/en/latest/user_guide.html#activators) it or skip this point.
+Build and run docker:
 
-Install the requirements:
-    
-    $ pip install -r requirements.txt
-Run server:
-
-    $ uvicorn main:app
-or (Gunicorn doesn't work on windows)
-
-    $ gunicorn -k uvicorn.workers.UvicornWorker main:app
+    $ docker-compose up -d --build
