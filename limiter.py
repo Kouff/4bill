@@ -8,7 +8,7 @@ from redis import Redis
 class Limiter:
     def __init__(self, func):
         self.func = func
-        self.redis = Redis(decode_responses=True)
+        self.redis = Redis(host='redis', decode_responses=True)
 
     def __call__(self, *args, **kwargs):
         now: int = int(time())  # get the current time
@@ -25,14 +25,14 @@ class Limiter:
         return None
 
     def write_request(self, time_now: int):
-        requests_per_second: int or None = int(self.redis.get(
-            time_now))  # get the number of requests for the current second. "None" if the first request in this second
+        requests_per_second: int or None = self.redis.get(
+            time_now)  # get the number of requests for the current second. "None" if the first request in this second
         if requests_per_second is None:
             self.redis.set(time_now, 1)  # create value
         else:
-            self.redis.set(time_now, requests_per_second + 1)  # rewrite value
+            self.redis.set(time_now, int(requests_per_second) + 1)  # rewrite value
 
     def get_requests_count(self, time_now: int, seconds: int) -> int:
         keys = [time_now - x for x in range(seconds)]
-        values = [int(x) for x in self.redis.mget(keys)]
+        values = [0 if x is None else int(x) for x in self.redis.mget(keys)]
         return sum(values)  # return the sum of all requests for a certain period of time
